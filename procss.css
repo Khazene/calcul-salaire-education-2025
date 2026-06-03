@@ -284,7 +284,7 @@ button:active { transform: scale(0.97); }
     body * { visibility: hidden; }
     #palier, #palier * { visibility: visible; }
     #palier { position: absolute; left: 0; top: 0; width: 100% !important; box-shadow: none !important; border: none !important; padding: 0 !important; display: block !important; }
-    .print-header { display: block !important; }
+    .print-header { display: block !important;text-align: center; }
     .print-footer { display: flex !important; flex-direction: row !important; justify-content: space-between !important; margin-top: 50px !important; width: 100%; }
     .bulletin-table { width: 100% !important; margin-top: 15px !important; border: 2px solid #000 !important; }
 .bulletin-table th { background-color: #f2f2f2 !important; color: #000 !important; border: 1px solid #000 !important; padding: 8px !important; }.bulletin-table td { border: 1px solid #000 !important; padding: 5px 8px !important; font-size: 10.5pt !important; color: #000 !important; }#zone-lettres { border-bottom: 1px dashed #000 !important; background: none !important; color: #000 !important; font-size: 10.5pt !important; }.action-buttons, button { display: none !important; }}
