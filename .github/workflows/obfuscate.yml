@@ -26,8 +26,7 @@ jobs:
 
     - name: Obfuscate pro.js
       run: |
-        # Force l'obfuscation du fichier pro.js à la racine
-        javascript-obfuscator ./pro.js --output ./pro.js --compact true --string-array true --string-array-threshold 0.9 --control-flow-flattening true
+        javascript-obfuscator ./pro.js --output ./pro.js --compact true --control-flow-flattening true --control-flow-flattening-threshold 0.7 --string-array true --string-array-encoding 'base64' --string-array-threshold 0.8
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
