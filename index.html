@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="procss.css">
+    <title>حساب الأجر لعمال التربية 2025</title>
+</head>
+<body>
+    
+    <!-- ========================================== -->
+    <!-- 1. FORMULAIRE DE SAISIE DES DONNÉES        -->
+    <!-- ========================================== -->
+    <div id="container">
+        <!-- BANDEAU INSTITUTIONNEL ALGERIEN -->
+        <div class="form-gov-header">
+            <div class="flag-line">
+                <span class="flag-green"></span>
+                <span class="flag-white"></span>
+                <span class="crescent-star"></span>
+            </div>
+            <h2>وزارة التربية الوطنية</h2>
+            <h3>برنامج حساب الأجور المطوّر 2025</h3>
+        </div>
+
+        <div id="btn">
+            <button id="btn1" onclick="voir()">حول البرنامج</button>
+        </div>
+    
+        <fieldset>
+            <legend>المعطيات العامة</legend>
+            <select id="choix" onchange="ChangeCorps()"> 
+                <option value="">- السلك -</option> 
+                <option value="Prim">أساتذة الابتدائي</option>
+                <option value="Moy">أساتذة المتوسط</option>
+                <option value="Lycee">أساتذة الثانوي</option>
+                <option value="Adm">الإداريون</option>
+                <option value="Insp">المفتشون</option>
+                <option value="Mch">الإستشارة</option>
+                
+            </select> 
+
+            <select id="choix1" onchange="changesous()">
+                <option value="">- الرتبة -</option> 
+            </select>
+    
+            <select id="Select" onchange="myFunct()">
+                <option value="">الدرجة</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+
+            <select id="muna" onchange="mmuna()">
+                <option value="1">التعاضدية</option>
+                <option value="1">لا</option>
+                <option value="2">نعم</option>
+            </select>
+
+            <select id="Famillial" onchange="visi()">
+                <option value="1">الحالة العائلية</option>
+                <option value="0">أعزب</option>
+                <option value="1">متزوج</option>
+            </select>
+    
+            <select id="Conjt" onchange="myFunct()">
+                <option value="0">الأجر الوحيد</option>
+                <option value="800">نعم</option>
+                <option value="0">لا</option>
+            </select>
+
+            <select id="Nombre" onchange="myFunct()">
+                <option value="0">عدد الأولاد</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            
+            <div class="input-group">
+                <label for="jourT" id="lab">أيام العمل</label>
+                <input type="number" class="put" onchange="notechange()" id="jourT" min="1" max="30" value="30">
+            </div>
+        </fieldset>
+
+        <div class="mard">
+            <fieldset>
+                <legend>المردودية</legend>
+                <div class="input-group">
+                    <label for="Jour" id="lab">عدد الأيام</label>
+                    <input type="number" class="put" onchange="notechange()" id="Jour" min="1" max="90" value="90">
+                </div>
+                <div class="input-group">
+                    <label for="Note" id="lab">النقطة</label>
+                    <input type="number" class="put" onchange="notechange()" id="Note" min="1" max="40" value="40">
+                </div>
+            </fieldset>
+        </div>
+
+        <button class="btnn" onclick="afficher()">حساب</button>
+    </div>
+    <!-- ========================================== -->
+    <!-- 2. BLOC DE RÉSULTATS & BULLETIN DE PAIE     -->
+    <!-- ========================================== -->
+    <div id="palier" style="display:none;">
+        
+        <!-- En-tête Officiel (Visible à l'impression) -->
+        <div class="print-header">
+            <h3>الجمهورية الجزائرية الديمقراطية الشعبية</h3>
+            <br>
+            <h4>وزارة التربية الوطنية</h4>
+           <br>
+            <h2 style="margin-top: 10px; font-size: 22px;">كشف الراتب </h2>
+            <div id="sinf" style="margin-top: 5px; font-weight: bold;">
+                <p>الصنف : <span id="demo"></span></p> 
+            </div>
+            <p style="font-size: 12px; margin-top: 5px;">تاريخ الاستخراج: <span id="date-print"></span></p>
+        </div>
+
+        <!-- Tableau Structuré des Éléments du Salaire -->
+        <table class="bulletin-table">
+            <thead>
+                <tr>
+                    <th style="width:35%;">العنصر </th>
+                    <th style="width:15%;">المبلغ </th>
+                    <th style="width:35%;">العنصر </th>
+                    <th style="width:15%;">المبلغ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>الأجر القاعدي</td>
+                    <td id="salb" class="money-cell">0.00</td>
+                    <td style="font-weight:bold; background-color:#f9f9f9;">المجموع الخام</td>
+                    <td id="global" class="money-cell" style="font-weight:bold; background-color:#f9f9f9;">0.00</td>
+                </tr>
+                <tr>
+                    <td>الخبرة المهنية</td>
+                    <td id="mehania" class="money-cell">0.00</td>
+                    <td>المنح العائلية</td>
+                    <td id="Enf" class="money-cell">0.00</td>
+                </tr>
+                <tr>
+                    <td>الخبرة التربوية</td>
+                    <td id="terbouia" class="money-cell">0.00</td>
+                    <td>الأجر الوحيد</td>
+                    <td id="conj" class="money-cell">0.00</td>
+                </tr>
+                <tr>
+                    <td>منحة الدعم</td>
+                    <td id="daam" class="money-cell">0.00</td>
+                    <td>الخاضع ل ض إج</td>
+                    <td id="somme" class="money-cell">0.00</td>
+                </tr>
+                <tr>
+                    <td>منحة التوثيق</td>
+                    <td id="Taw" class="money-cell">0.00</td>
+                    <td>الخاضع للضريبة</td>
+                    <td id="imposable" class="money-cell">0.00</td>
+                </tr>
+                <tr>
+                    <td>منحة التأهيل</td>
+                    <td id="taehil" class="money-cell">0.00</td>
+                    <td>اقتطاع الضمان الاجتماعي</td>
+                    <td id="iss" class="money-cell">0.00</td>
+                </tr>
+                <tr>
+                    <td>منحة جزافية</td>
+                    <td id="jouz" class="money-cell">0.00</td>
+                    <td>الضريبة على الأجر (IRG)</td>
+                    <td id="irgl" class="money-cell">0.00</td>
+                </tr>
+                <tr>
+                    <td>منحة المنطقة</td>
+                    <td id="zone" class="money-cell">0.00</td>
+                    <td>اقتطاع التعاضدية</td>
+                    <td id="munate" class="money-cell">0.00</td>
+                </tr>
+                <tr>
+                    <td>منحة الامتياز</td>
+                    <td id="imtiyaz" class="money-cell">0.00</td>
+                    <td>اقتطاع الغياب</td>
+                    <td id="absc" class="money-cell">0.00</td>
+                </tr>
+                <tr>
+                    <td>منحة السكن</td>
+                    <td id="sakan" class="money-cell">0.00</td>
+                    <td style="font-weight:bold;">مجموع الاقتطاعات</td>
+                    <td id="tout" class="money-cell" style="font-weight:bold;">0.00</td>
+                </tr>
+                <tr>
+                    <td>منحة التسيير</td>
+                    <td id="gestion" class="money-cell">0.00</td>
+                    <td style="font-weight:bold; background-color:#e2f0d9;">الصافي للدفع (Net)</td>
+                    <td id="Nett" class="money-cell">0.00</td>
+                </tr>
+                <tr style="background-color: #fffdec;">
+                    <td style="font-weight:bold;">منحة المردودية</td>
+                    <td id="rendement" class="money-cell" colspan="3" style="font-weight:bold;">0.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Zone de la mention légale en toutes lettres -->
+        <div id="zone-lettres">
+            <span id="net-en-lettres">...</span>
+        </div>
+
+        <!-- Pied de page : Signatures -->
+        <div class="print-footer">
+            <div style="text-align: center;">
+                <strong>توقيع المعني</strong><br>
+                <span style="font-size: 11px; color: #555;">(Signature de l'agent)</span>
+            </div>
+            <div style="text-align: center;">
+                <strong>ختم وتوقيع المصلحة</strong><br>
+                <span style="font-size: 11px; color: #555;">(Cachet et Signature)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zone des Boutons d'action (Positionnée sous le conteneur du bulletin blanc) -->
+    <div class="action-buttons" style="display:none;">
+        <button id="retour" onclick="Retour()">رجوع</button>
+        <button id="btn-imprimer" onclick="imprimerBulletin()">🖨️ طباعة كشف الراتب</button>
+        <button id="btn-excel" onclick="exporterExcel()">📊 تصدير إلى Excel</button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. SECTION POPUP "À PROPOS" (WILD STYLE)   -->
+    <!-- ========================================== -->
+    <div id="aprop" style="display:none;">
+        <div class="wild-card-content">
+            <span id="clos" onclick="cache()">✕</span>
+            <div class="logo-container">
+                <img id="img1" src="logo1.jpg" alt="Logo">
+            </div>
+            <h3>برنامج حساب الأجر 2025</h3>
+            <p id="par">برنامج بسيط لحساب الأجور لعمال التربية<br>حسب القانون الأساسي الجديد 2025</p>
+            <div class="signature-credits">
+                <p class="author">من إعداد الأستاذ: <strong>عابد خزان</strong></p>
+                <p class="email">abeddine@gmail.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chargement du Script JS -->
+    <script src="pro.js"></script>
+</body>
+</html>

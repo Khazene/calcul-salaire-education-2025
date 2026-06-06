@@ -1,0 +1,290 @@
+/* ==========================================================================
+   1. STYLES GÉNÉRAUX & INTERFACE ÉCRAN (FORMULAIRE DE Saisie)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    direction: rtl;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #112217 0%, #223a2a 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: #333;
+}
+
+#container {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 440px;
+    padding: 15px 20px;
+    position: relative;
+    border: 1px solid rgba(40, 167, 69, 0.2);
+    border-top: 5px solid #28a745;
+    z-index: 20;
+}
+
+fieldset {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    background-color: #f8fafc;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+}
+
+legend {
+    font-weight: 700;
+    color: #1b4d22;
+    padding: 0 8px;
+    font-size: 13px;
+}
+
+#choix, #choix1 {
+    grid-column: span 2;
+}
+
+select, input {
+    width: 100%;
+    margin: 2px 0;
+    padding: 7px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13.5px;
+    font-family: inherit;
+    font-weight: 500;
+    direction: rtl !important;
+    text-align: right !important;
+    text-align-last: right !important;
+    background-color: #ffffff;
+    color: #1e293b;
+    transition: all 0.2s ease;
+}
+
+select:focus, input:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+    outline: none;
+}
+
+.input-group {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2px 0;
+}
+
+input.put {
+    text-align: center !important;
+    direction: ltr !important;
+    font-weight: 700;
+    width: 65px;
+    margin: 0;
+}
+
+#lab {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 700;
+}
+
+/* BANDEAU REPUBLIQUE */
+.form-gov-header {
+    text-align: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #cbd5e1;
+}
+.form-gov-header h2 {
+    font-size: 16px;
+    color: #1b4d22;
+    font-weight: 800;
+    margin-top: 6px;
+}
+.form-gov-header h3 {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+}
+.flag-line {
+    display: flex;
+    height: 16px;
+    width: 42px;
+    margin: 0 auto;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #cbd5e1;
+}
+.flag-green { background-color: #006633; width: 50%; }
+.flag-white { background-color: #ffffff; width: 50%; }
+.crescent-star {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px; height: 14px;
+}
+.crescent-star::before {
+    content: ''; position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    box-shadow: -2.5px 0px 0 0 #d2143a;
+    left: 2px; top: 2px;
+}
+.crescent-star::after {
+    content: '★'; position: absolute;
+    color: #d2143a; font-size: 8px;
+    left: 5px; top: 2px;
+}
+
+/* ==========================================================================
+   2. BOUTONS & NAVIGATION
+   ========================================================================== */
+button {
+    font-family: inherit;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.25s ease;
+}
+button:active { transform: scale(0.97); }
+
+.btnn {
+    width: 100%;
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+.btnn:hover { transform: translateY(-2px); background: linear-gradient(135deg, #218838 0%, #19692c 100%); }
+.btnn::before { content: '✅ '; }
+
+#btn { width: 100%; display: flex; justify-content: flex-end; margin-bottom: 5px; }
+#btn1 { background: linear-gradient(135deg, #17a2b8 0%, #117a8b 100%); color: white; padding: 6px 12px; font-size: 12px; }
+#btn1:hover { background: linear-gradient(135deg, #138496 0%, #0f6c7c 100%); }
+#btn1::before { content: '🍏 '; }
+
+.action-buttons {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    display: none;
+    gap: 12px;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    animation: fadeInUp 0.5s ease forwards;
+}
+#retour { background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white; padding: 11px 20px; width: auto !important; min-width: 90px; }
+#btn-imprimer { background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); color: white; padding: 11px 20px; width: auto !important; min-width: 160px; }
+#btn-excel { background: linear-gradient(135deg, #1d6f42 0%, #104f2c 100%); color: white; padding: 11px 20px; width: auto !important; min-width: 140px; }
+#retour:hover, #btn-imprimer:hover, #btn-excel:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+/* ==========================================================================
+   3. BLOC DES RÉSULTATS (TABLEAU ÉCRAN)
+   ========================================================================== */
+#palier {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 800px;
+    padding: 25px;
+    border-top: 5px solid #007bff;
+    display: none;
+    flex-direction: column;
+    direction: rtl;
+    animation: fadeInUp 0.5s ease forwards;
+}
+.bulletin-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
+.bulletin-table th { background-color: #007bff; color: white; font-weight: 700; padding: 11px; border: 1px solid #dee2e6; }
+.bulletin-table td { padding: 8px 12px; border: 1px solid #dee2e6; text-align: right; }
+.bulletin-table tbody tr:nth-child(even) { background-color: #fcfcfc; }
+
+.money-cell {
+    direction: ltr !important; unicode-bidi: embed;
+    font-family: 'Consolas', 'Courier New', monospace; font-weight: bold;
+    text-align: center !important; color: #111;
+}
+#Nett { color: #155724 !important; font-size: 18px !important; background-color: #d4edda !important; transform: none; box-shadow: none; border: 1px solid #c3e6cb; }
+
+#zone-lettres {
+    background-color: #f8f9fa; border-radius: 6px; padding: 12px;
+    margin: 10px 0 !important; border-right: 4px solid #28a745;
+    font-size: 13.5px; font-weight: bold; color: #1e4620; text-align: right;
+}
+
+/* ==========================================================================
+   4. PROTECTION ABSOLUE POPUP "A PROPOS" (WILD CARD)
+   ========================================================================== */
+#aprop {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(10, 20, 14, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 99999 !important; /* Force le passage au tout premier plan */
+    display: none; /* Piloté en "flex" par le JS */
+    justify-content: center;
+    align-items: center;
+}
+.wild-card-content {
+    background: linear-gradient(145deg, rgba(20, 35, 25, 0.95), rgba(10, 15, 12, 0.98));
+    border: 1px solid rgba(40, 167, 69, 0.4);
+    border-radius: 20px;
+    width: 330px; padding: 25px 20px;
+    text-align: center; position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    color: #e0e7e1;
+    animation: wildAppear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.logo-container { width: 170px; height: 200px; margin: 5px auto 15px auto; border-radius: 30% / 20%; overflow: hidden; border: 2px solid #28a745; box-shadow: 0 6px 15px rgba(0,0,0,0.5); background: #000; }
+#img1 { width: 100%; height: 100%; object-fit: cover; }
+#clos { position: absolute; top: 12px; left: 15px; font-size: 20px; font-weight: bold; color: #ff4d4d; cursor: pointer; transition: all 0.2s; }
+#clos:hover { color: #ff1a1a; transform: scale(1.1) rotate(90deg); }
+.wild-card-content h3 { font-size: 19px; color: #52c46a; margin-bottom: 10px; }
+#par { font-size: 13.5px; line-height: 1.5; color: #b3c3b7; margin-bottom: 20px; }
+.signature-credits { background: rgba(255, 255, 255, 0.04); padding: 10px; border-radius: 10px; font-size: 12.5px; }
+.signature-credits .author { color: #fff; margin-bottom: 3px; }
+.signature-credits .email { color: #8da393; font-family: monospace; }
+
+@keyframes wildAppear {
+    0% { opacity: 0; transform: scale(0.7) translateY(20px) rotateX(-15deg); }
+    100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0deg); }
+}
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   5. CONFIGURATION STRICTE IMPRESSION A4
+   ========================================================================== */
+.print-header, .print-footer { display: none; }
+@media print {
+    @page { size: A4 portrait; margin: 12mm 15mm; }
+    body { background: none !important; color: #000 !important; }
+    body * { visibility: hidden; }
+    #palier, #palier * { visibility: visible; }
+    #palier { position: absolute; left: 0; top: 0; width: 100% !important; box-shadow: none !important; border: none !important; padding: 0 !important; display: block !important; }
+    .print-header { display: block !important;  text-align: center;}
+    .print-footer { display: flex !important; flex-direction: row !important; justify-content: space-between !important; margin-top: 50px !important; width: 100%; }
+    .bulletin-table { width: 100% !important; margin-top: 15px !important; border: 2px solid #000 !important; }
+.bulletin-table th { background-color: #f2f2f2 !important; color: #000 !important; border: 1px solid #000 !important; padding: 8px !important; }.bulletin-table td { border: 1px solid #000 !important; padding: 5px 8px !important; font-size: 10.5pt !important; color: #000 !important; }#zone-lettres { border-bottom: 1px dashed #000 !important; background: none !important; color: #000 !important; font-size: 10.5pt !important; }.action-buttons, button { display: none !important; }}
