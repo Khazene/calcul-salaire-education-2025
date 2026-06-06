@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +26,8 @@ jobs:
 
     - name: Obfuscate pro.js
       run: |
-        javascript-obfuscator pro.js --output pro.js --compact true --string-array true --string-array-threshold 0.8
+        # Force l'obfuscation du fichier pro.js à la racine
+        javascript-obfuscator ./pro.js --output ./pro.js --compact true --string-array true --string-array-threshold 0.9 --control-flow-flattening true
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
