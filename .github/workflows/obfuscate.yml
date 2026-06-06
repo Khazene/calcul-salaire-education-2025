@@ -1,0 +1,32 @@
+name: Obfuscate and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install JavaScript Obfuscator
+      run: npm install -g javascript-obfuscator
+
+    - name: Obfuscate pro.js
+      run: |
+        javascript-obfuscator pro.js --output pro.js --compact true --string-array true --string-array-threshold 0.8
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: . 
+        branch: gh-pages
