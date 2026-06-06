@@ -118,11 +118,12 @@ const GRADES_CONFIG = {
     x: 18, tawthik: 3000, jouzafia: 1500, salbase: 1130 * 45, gestion: 0,
     eche: [0, 57, 113, 170, 226, 283, 339, 396, 452, 509, 565, 622, 678]
   },
-  // --- 5. CORPS D'Conseille ---
+// --- 5. CORPS D'Conseille ---
  'مساعد التربية': {
     x: 7, tawthik: 2000, jouzafia: 2500, salbase: 548 * 45, gestion: 0,
     eche: [0, 27, 55, 82, 110, 137, 164, 192, 219, 247, 274, 301, 329]
   },
+
 
  'مساعد رئيسي للتربية': {
     x: 8, tawthik: 2000, jouzafia: 2500, salbase: 579 * 45, gestion: 0,
@@ -163,7 +164,6 @@ const GRADES_CONFIG = {
     x: 13, tawthik: 3000, jouzafia: 1500, salbase: 778 * 45, gestion: 0,
     eche: [0, 39, 78, 117, 156, 195, 233, 272.31, 350, 389, 428, 467]
   },
-
 };
 
 
@@ -286,14 +286,14 @@ function myFunct() {
   salaire = salbase + Mehania;
   daam = salaire * 0.45;
 
-  if (x > 13) {
+  if (x > 13 ) {
     taehil = salaire * 0.45;
     Minha = enfant * 300;
   } else {
     taehil = salaire * 0.40;
     Minha = enfant * 600;
   }
-
+ 
   if (x >= 11) {
     imtiyaz = salaire * 0.30;
     sakan = 1000;
@@ -303,10 +303,9 @@ function myFunct() {
     sakan = 0;
     zone = 764.4;
   }
-   if (x >= 17){
+ if (x >= 17){
   zone = 1096.2;
 }
-
   finaliserCalculSalaire();
 }
 
