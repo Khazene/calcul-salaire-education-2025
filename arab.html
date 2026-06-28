@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة الترقية القادمة</title>
+    <!-- Chargement de la police arabe Cairo et des icônes Font Awesome -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        :root {
+            --gradient-bg: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --primary: #4f46e5;
+            --primary-light: #e0e7ff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            
+            --shadow-card: 0 20px 40px -15px rgba(15, 23, 42, 0.3), 0 15px 25px -10px rgba(15, 23, 42, 0.2);
+            --shadow-input: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-focus: 0 10px 15px -3px rgba(79, 70, 229, 0.2), 0 0 0 4px rgba(79, 70, 229, 0.15);
+            --shadow-btn: 0 4px 12px rgba(239, 68, 68, 0.2);
+            --shadow-btn-hover: 0 8px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 26px;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .input-icon-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon-wrapper i {
+            position: absolute;
+            right: 16px;
+            color: var(--text-muted);
+            font-size: 16px;
+            pointer-events: none;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 45px 14px 16px;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            background-color: #ffffff;
+            box-shadow: var(--shadow-input);
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .input-icon-wrapper input:focus + i,
+        .input-icon-wrapper select:focus + i {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-focus);
+        }
+
+        .info-box {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Style de la case résultat modifiée en type="text" */
+        .result-box {
+            background: linear-gradient(to left, #f0fdf4, #dcfce7);
+            border: 2px solid #bbf7d0;
+            color: #15803d;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: not-allowed;
+            text-align: center; /* Centre la date pour une meilleure lecture */
+        }
+
+        .input-icon-wrapper .result-icon {
+            color: #16a34a;
+        }
+
+        .btn-reset {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            margin-top: 12px;
+            box-shadow: var(--shadow-btn);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-reset:hover {
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+            box-shadow: var(--shadow-btn-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-reset:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>حساب الترقية</h2>
+
+    <!-- Case 1 : Date de la dernière promotion -->
+    <div class="form-group">
+        <label for="datePromo">تاريخ آخر ترقية</label>
+        <div class="input-icon-wrapper">
+            <input type="date" id="datePromo" onchange="calculerTout()">
+            <i class="fa-regular fa-calendar-days"></i>
+        </div>
+        <div id="ancienneteActuelle" class="info-box"></div>
+    </div>
+
+    <!-- Case 2 : Options de durée -->
+    <div class="form-group">
+        <label for="duree">المدة المطلوبة</label>
+        <div class="input-icon-wrapper">
+            <select id="duree" onchange="calculerTout()">
+                <option value="">اختر المدة...</option>
+                <option value="2"> الدنيا</option>
+                <option value="3">المتوسطة</option>
+                <option value="3.5">القصوى</option>
+            </select>
+            <i class="fa-solid fa-hourglass-half"></i>
+        </div>
+    </div>
+
+    <!-- Case 3 : Résultat du calcul (Modifié en type="text") -->
+    <div class="form-group">
+        <label for="dateResultat">تاريخ الترقية القادمة</label>
+        <div class="input-icon-wrapper">
+            <input type="text" id="dateResultat" class="result-box" readonly placeholder="-- / -- / ----">
+            <i class="fa-solid fa-graduation-cap result-icon"></i>
+        </div>
+        <div id="weekendAlerte" class="info-box" style="color: #ea580c;"></div>
+    </div>
+
+    <!-- Bouton de réinitialisation -->
+    <button class="btn-reset" onclick="reinitialiserFormulaire()">
+        <i class="fa-solid fa-trash-can"></i> إعادة تعيين البيانات
+    </button>
+</div>
+
+<script>
+
+
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key))) {
+    e.preventDefault();
+  }
+});
+function calculerTout() {
+    const inputDate = document.getElementById('datePromo').value;
+    const selectDuree = document.getElementById('duree').value;
+    const inputResultat = document.getElementById('dateResultat');
+    const txtAnciennete = document.getElementById('ancienneteActuelle');
+    const txtWeekend = document.getElementById('weekendAlerte');
+
+    txtAnciennete.innerText = "";
+    txtWeekend.innerText = "";
+
+    // Si la date d'origine n'est pas saisie, on vide le résultat
+    if (!inputDate) {
+        inputResultat.value = "";
+        return;
+    }
+
+    let dateOrigine = new Date(inputDate);
+    let aujourdhui = new Date();
+    let differenceTemps = aujourdhui - dateOrigine;
+    
+    if (differenceTemps > 0) {
+        let joursAnciennete = Math.floor(differenceTemps / (1000 * 60 * 60 * 24));
+        txtAnciennete.innerText = `⏱️ الأقدمية الحالية: تم اكتساب ${joursAnciennete} يوم`;
+    }
+
+    // Si la durée n'est pas encore choisie, on s'arrête ici
+    if (!selectDuree) {
+        inputResultat.value = "";
+        return;
+    }
+
+    let anneeOrigine = dateOrigine.getFullYear();
+    let moisOrigine = dateOrigine.getMonth();
+    let jourOrigine = dateOrigine.getDate();
+    
+    let anneesAAjouter = parseFloat(selectDuree);
+    let anneesEntieres = Math.floor(anneesAAjouter); 
+    let moisAAjouter = (anneesAAjouter - anneesEntieres) * 12;
+
+    let anneeCible = anneeOrigine + anneesEntieres;
+    let moisCible = moisOrigine + moisAAjouter;
+
+    if (moisCible > 11) {
+        anneeCible += Math.floor(moisCible / 12);
+        moisCible = moisCible % 12;
+    }
+
+    let dernierJourDuMoisCible = new Date(anneeCible, moisCible + 1, 0).getDate();
+    let jourFinal = Math.min(jourOrigine, dernierJourDuMoisCible);
+
+    let nouvelleDate = new Date(anneeCible, moisCible, jourFinal);
+
+    // Ajustement Week-end
+    let jourSemaine = nouvelleDate.getDay();
+    if (jourSemaine === 5) { 
+        nouvelleDate.setDate(nouvelleDate.getDate() + 2);
+        txtWeekend.innerText = "⚠️ يصادف يوم الجمعة.    ";
+    } else if (jourSemaine === 1) { 
+        nouvelleDate.setDate(nouvelleDate.getDate() + 1);
+        txtWeekend.innerText = "⚠️ يصادف يوم السبت.";
+    }
+
+    // Formatage au format classique local (JJ/MM/AAAA)
+     jour = String(nouvelleDate.getDate()).padStart(2, '0');
+     mois = String(nouvelleDate.getMonth() + 1).padStart(2, '0');
+     annee = nouvelleDate.getFullYear();
+
+       // Insertion du texte dans la case de résultat
+     jour = String(nouvelleDate.getDate()).padStart(2, '0');
+     mois = String(nouvelleDate.getMonth() + 1).padStart(2, '0');
+     annee = nouvelleDate.getFullYear();
+
+    // L'élément input de type "date" exige le format strict AAAA-MM-JJ pour afficher quelque chose
+    inputResultat.value = `${annee}-${mois}-${jour}`;
+}
+
+function reinitialiserFormulaire() {
+    document.getElementById('datePromo').value = "";
+    document.getElementById('duree').value = "";
+    document.getElementById('dateResultat').value = "";
+    document.getElementById('ancienneteActuelle').innerText = "";
+    document.getElementById('weekendAlerte').innerText = "";
+}
+</script>
+
+</body>
+</html>
