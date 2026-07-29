@@ -119,6 +119,7 @@ input.put {
     margin-top: 2px;
 }
 .flag-line {
+   
     display: flex;
     height: 16px;
     width: 42px;
@@ -195,7 +196,9 @@ button:active { transform: scale(0.97); }
 #retour { background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white; padding: 11px 20px; width: auto !important; min-width: 90px; }
 #btn-imprimer { background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); color: white; padding: 11px 20px; width: auto !important; min-width: 160px; }
 #btn-excel { background: linear-gradient(135deg, #1d6f42 0%, #104f2c 100%); color: white; padding: 11px 20px; width: auto !important; min-width: 140px; }
-#retour:hover, #btn-imprimer:hover, #btn-excel:hover { transform: translateY(-2px); filter: brightness(1.1); }
+#btn-passer-retraite { background: linear-gradient(135deg, #e2e214 0%, #c9ad0f 100%); color: white; padding: 11px 20px; width: auto !important; min-width: 140px; }
+
+#retour:hover, #btn-imprimer:hover, #btn-excel:hover,#btn-passer-retraite { transform: translateY(-2px); filter: brightness(1.1); }
 
 /* ==========================================================================
    3. BLOC DES RÉSULTATS (TABLEAU ÉCRAN)

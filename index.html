@@ -25,17 +25,21 @@
     <!-- 3. SECTION POPUP "À PROPOS" (WILD STYLE)   -->
     <!-- ========================================== -->
      <!-- Bouton pour ouvrir le calculateur de promotion -->
-<button class="btn-ouvrir-promo"  onclick="ouvrirCalculateur()">
+<div class="boutons-groupe">
+     <button class="btn-ouvrir-promo"  onclick="ouvrirCalculateur()">
     <i class="fa-solid fa-arrow-up-right-from-square"></i> حساب الترقية
 </button>
-  <div id="btn">
-            <button id="btn1" onclick="voir()">حول البرنامج</button>
+  
+            <button class="btn-ouvrir-promo" onclick="voir()">حول البرنامج</button>
+           
         </div>
 <style>
     /* Style attractif assorti pour le bouton */
     .btn-ouvrir-promo {
-        padding: 8px 15px;
-        background: linear-gradient(135deg, #6366f1 30%, #a855f7 70%);
+        margin-top: 3%;
+        margin-right: 4%;
+        padding: 8px 25px;
+        background: linear-gradient(135deg, #7ace54 30%, #417d04 70%);
         color: white;
         border: none;
         border-radius: 10px;
@@ -43,13 +47,16 @@
         font-weight: 700;
         font-size: 15px;
         cursor: pointer;
-        display: inline-flex;
-        align-items:flex-start;
-        gap: 8px;
-        box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.25);
+        display:inline-table;        
+       align-items:flex-start;
+       box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.25);
         transition: all 0.25s ease;
     }
-
+    
+.boutons-groupe{
+  display: flex;
+  gap: 85px; /* Espace automatique entre les boutons */
+}
     .btn-ouvrir-promo:hover {
         background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
         box-shadow: 0 12px 20px -3px rgba(168, 85, 247, 0.4);
@@ -281,6 +288,11 @@
         <button id="retour" onclick="Retour()">رجوع</button>
         <button id="btn-imprimer" onclick="imprimerBulletin()">🖨️ طباعة كشف الراتب</button>
         <button id="btn-excel" onclick="exporterExcel()">📊 تصدير إلى Excel</button>
+       <button id="btn-passer-retraite" >
+    حساب التقاعد
+</button>
+
+
     </div>
 
 

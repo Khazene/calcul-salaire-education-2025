@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسب التقاعد  — الجزائر</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- الواجهة الرئيسية للوحة التحكم -->
+    <div class="dashboard-layout">
+        
+        <!-- القسم الأيمن: نموذج إدخال البيانات -->
+        <div class="card form-section">
+            <h2>حساب التقاعد </h2>
+            <p class="subtitle">محاكي معاش التقاعد وفقاً للتشريع الجزائري المعمول به</p>
+
+            <div class="form-group">
+                <label for="salaireRef">متوسط الأجر للسنوات الخمس الأفضل (الخاضع للاشتراك)</label>
+                <div class="input-wrapper">
+                    <input type="number" id="salaireRef" placeholder="مثال: 55000" min="0">
+                    <span class="currency-addon">دج</span>
+                </div>
+                <div id="error-salaire" class="error-message">يرجى إدخال مبلغ أجر صحيح.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="annees">عدد سنوات الاشتراك الفعلية</label>
+                <div class="input-wrapper">
+                    <input type="number" id="annees" placeholder="مثال: 25" min="1" max="40">
+                    <span class="currency-addon">سنة</span>
+                </div>
+                <div id="error-annees" class="error-message">يرجى إدخال عدد سنوات صحيح.</div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="isMoudjahid">
+                    <label for="isMoudjahid">صفة مجاهد (معدل 3.5% / سنة وسقف 100%)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="hasConjoint">
+                    <label for="hasConjoint">منحة الزوج المتكفل به (+2,500 دج / شهرياً)</label>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button id="btn-calcul" class="btn-primary">احسب التقاعد</button>
+                <button id="btn-toggle-history" class="btn-secondary">الأرشيف</button>
+                <button id="btn-toggle-Ret" class="btn-sec">رجوع</button>
+                
+            </div>
+        </div>
+
+        <!-- القسم الأيسر: كشف الحساب الديناميكي -->
+        <div class="card result-section">
+            <div class="result-title">تفاصيل معاش التقاعد الشهري</div>
+            
+            <div id="result-placeholder" class="placeholder-msg">
+                أدخل بياناتك ثم اضغط على زر "احسب المعاش" لتوليد كشف الحساب.
+            </div>
+
+            <div id="result-box" class="result-data-grid">
+                <div class="result-row">
+                    <span class="result-label">المعدل المطبق:</span>
+                    <span id="res-taux" class="neutral-val">0 %</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">معاش التقاعد الخام الأساسي:</span>
+                    <span id="res-brut" class="neutral-val">0.00 دج</span>
+                </div>
+                <div class="result-row" id="row-majoration">
+                    <span class="result-label">إعانة الزوج:</span>
+                    <span id="res-majoration" class="success-val">+0.00 دج</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">اقتطاع الضمان الاجتماعي (2%):</span>
+                    <span id="res-cnas" class="danger-val">-0.00 دج</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">اقتطاع الضريبة (IRG):</span>
+                    <span id="res-irg" class="danger-val">-0.00 دج</span>
+                </div>
+                <div class="result-row total-row">
+                    <span class="result-label">صافي معاش التقاعد المستلم:</span>
+                    <span id="res-net" class="success-val-total">0.00 دج</span>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- القائمة الجانبية للأرشيف -->
+    <div id="history-drawer" class="history-drawer">
+        <div class="drawer-header">
+            <h3>الحسابات الأخيرة</h3>
+            <button id="btn-close-history" class="btn-close">&times;</button>
+        </div>
+        <ul id="history-ul" class="history-list">
+            <p class="empty-history" id="empty-msg">لا توجد حسابات مسجلة حالياً</p>
+        </ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
