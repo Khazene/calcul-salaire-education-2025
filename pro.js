@@ -1,11 +1,11 @@
-
 document.addEventListener('contextmenu', event => event.preventDefault());
 document.addEventListener('keydown', (e) => {
   if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key))) {
     e.preventDefault();
   }
 });
-// =========================================
+
+// ==========================================
 // 1. DONNÉES ET CONFIGURATION DES CORPS
 // ==========================================
 const ENSG_DATA = {
@@ -191,6 +191,7 @@ let tout = 0;
 let jou = 90;
 let nott = 40;
 let Rndf = 0;
+let Rndf1 = 0;
 let Abscen = 30;
 let abscmoins = 0;
 let Netpay = 0;
@@ -400,8 +401,10 @@ if (!currentGradeData) {
   myFunct(); 
   notechange();
   mmuna();
-  
+  //
   Rndf = (nott / 40) * salaire * (jou / 30) * (0.4 * 0.819);
+  Rndf1 =((nott / 40) * salaire * (jou / 30) * 0.4 )/3;
+  
   Netpay = glob - tout;
   
   // Correction stricte du calcul de la retenue pour absence
@@ -438,6 +441,21 @@ if (!currentGradeData) {
 const montantEnLettres = fractionnerNombreEnLettres(Netpay);
   document.getElementById("net-en-lettres").innerText = montantEnLettres;
 
+// 1. Rendre le bouton visible dès que le salaire est calculé
+const btnRetraite = document.getElementById("btn-passer-retraite");
+btnRetraite.style.display = "block";
+
+// 2. Événement au clic pour transférer la donnée et ouvrir le calculateur de retraite
+btnRetraite.onclick = function() {
+    // Remplacer 'salaireImposableCalcule' par le nom de VOTRE variable de salaire imposable
+    let montantA_Transferer = resultat+Rndf1; 
+    
+    // Sauvegarde temporaire dans le navigateur
+    localStorage.setItem("salaireImposableEducation", montantA_Transferer);
+    
+    // Ouvre le calculateur de retraite (remplacez 'retraite.html' par le nom réel de votre fichier de retraite)
+    window.location.href = "retraite.html"; 
+};
 
 
 
